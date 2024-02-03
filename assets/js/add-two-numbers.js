@@ -1,37 +1,23 @@
-function ListNode(val, next) {
-    this.val = (val === undefined ? 0 : val);
-    this.next = (next === undefined ? null : next);
+function addNumbers() {
+  const l1Input = document.getElementById('l1').value;
+  const l2Input = document.getElementById('l2').value;
+
+  const l1 = l1Input.split(',').map(Number).reverse();
+  const l2 = l2Input.split(',').map(Number).reverse();
+
+  let carry = 0;
+  let result = [];
+
+  for (let i = 0; i < Math.max(l1.length, l2.length); i++) {
+    const sum = (l1[i] || 0) + (l2[i] || 0) + carry;
+    result.push(sum % 10);
+    carry = Math.floor(sum / 10);
   }
-  
-  function addTwoNumbers(l1, l2) {
-    let dummyHead = new ListNode(0);
-    let p = l1, q = l2, current = dummyHead;
-    let carry = 0;
-  
-    while (p !== null || q !== null) {
-      let x = (p !== null) ? p.val : 0;
-      let y = (q !== null) ? q.val : 0;
-  
-      let sum = x + y + carry;
-      carry = Math.floor(sum / 10);
-  
-      current.next = new ListNode(sum % 10);
-      current = current.next;
-  
-      if (p !== null) p = p.next;
-      if (q !== null) q = q.next;
-    }
-  
-    if (carry > 0) {
-      current.next = new ListNode(carry);
-    }
-  
-    return dummyHead.next;
+
+  if (carry > 0) {
+    result.push(carry);
   }
-  
-  // Example usage:
-  const l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
-  const l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
-  
-  const result = addTwoNumbers(l1, l2);
-  console.log(result);
+
+  const resultElement = document.getElementById('result');
+  resultElement.textContent = result;
+}

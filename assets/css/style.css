@@ -165,6 +165,11 @@ header p {
 
 }
 
+#result {
+    font-weight: bold;
+}
+  
+
 /* Sticky footer styles
   -------------------------------------------------- */
 html {
